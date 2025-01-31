@@ -129,4 +129,4 @@ Add this button to your **footer or menu**:
 ```
 
 ## Support & Customization
-If you need **additional features** or **support**, feel free to modify the code or contact a developer. This is released as-is.
+If you need **additional features** or **support**, feel free to modify the code, fork or contact a developer. This is released as-is. I will not provide support.
