@@ -9,6 +9,7 @@ gtagScript.onload = function () {
     gtag("js", new Date());
     gtag("config", "G-XXXXXXXXXX");
 };
+
 // Microsoft Clarity
 let clarityScript = document.createElement("script");
 clarityScript.innerHTML = `(function(c,l,a,r,i,t,y){
@@ -17,7 +18,9 @@ clarityScript.innerHTML = `(function(c,l,a,r,i,t,y){
     y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
 })(window, document, "clarity", "script", "YOUR_CLARITY_ID");`;
 document.head.appendChild(clarityScript);
-// Facebook Pixel
+
+/*
+ // Facebook Pixel
 let fbScript = document.createElement("script");
 fbScript.innerHTML = `!function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?
     n.callMethod.apply(n,arguments):n.queue.push(arguments)};
@@ -29,3 +32,4 @@ fbScript.innerHTML = `!function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(
     fbq('init', 'YOUR_FACEBOOK_PIXEL_ID');
     fbq('track', 'PageView');`;
 document.head.appendChild(fbScript);
+*/
