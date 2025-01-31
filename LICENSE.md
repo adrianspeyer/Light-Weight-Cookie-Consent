@@ -1,8 +1,6 @@
-# The Enthusiast Coder License (EnCL) - Version 1.0
+# The Enthusiast Coder License (EnCL) - Version 1.01
 
 Copyright (c) 2025 Adrian Speyer
-
-This is the "Enthusiast Coder License" (EnCL) - created for people who code for the love of it and want to share their creations with the universe. This license is designed for enthusiasts, hobbyists, and professionals from other fields who code on the side and want to be transparent about the nature of their projects.
 
 ## Permissions
 
@@ -28,51 +26,29 @@ You are free to:
    - This license
    - Clear indication if the code has been modified
 
-## Commercial Use Considerations
+## Derivative Works and Licensing
 
-While this code is free to use commercially, we encourage commercial users to:
-1. Consider fair compensation to the original author if the code becomes a substantial part of a profitable venture
-2. Share back any significant improvements or modifications
-3. Provide public acknowledgment of the code's origins
-4. Consider sponsoring the original author's open source work
+- Derivative works may be released under different licenses
+- The original code remains under this license and requires attribution as specified
+- Original author's disclaimers and support limitations apply only to the original code
+- Derivative work creators may offer their own terms, support, and warranties for their modifications
+- This license's requirements apply only to the original code and original author
 
-## Code Evolution and Contributions
+## Support and Maintenance
 
-This code is a living project that may evolve over time:
-
-- The author may improve, modify, or completely rewrite code as better solutions are discovered
-- Updates happen organically based on the author's learning, interests, and available time
-- There is no commitment to any timeline for improvements or changes
-- While the code exists "as-is" at any given moment, it may be enhanced over time
-- The direction of changes is guided by the author's personal interests and learning journey
-
-Regarding contributions and issues:
-- You can submit issues and improvements through the repository
-- There is NO Service Level Agreement (SLA) for responses or fixes
-- The author reviews and works on this code as time permits and for personal interest
-- Response times are not guaranteed
+- No Service Level Agreement (SLA) is provided
 - Support is provided on a "best effort, when possible" basis
-- The author maintains full discretion over which issues to address or improvements to accept
-- Contributions may be considered, but their implementation timeline cannot be guaranteed
+- The author maintains full discretion over which issues to address
+- Response times are not guaranteed
+- The author may modify or update the code based on personal interests and available time
+- Derivative works may offer their own support and maintenance terms
 
-## Important Disclaimers
+## Disclaimers
 
-Please understand:
-
-- This code is written by an enthusiast coder, not a full-time developer
 - The code is provided AS-IS, without warranties or guarantees of any kind
 - No professional support is provided or implied
-- YOU are responsible for testing and validating this code in your environment
-- For production environments or critical systems, please consult with professional developers
+- Users are responsible for testing and validating this code in their environment
 - The author is not liable for any outcomes resulting from the use of this code
-
-## Philosophy
-
-This license exists to encourage knowledge sharing and creative coding while being transparent about its nature as an enthusiast project. It's designed for those who want to share their work openly while being clear about support limitations.
-
-Are you someone who codes for the joy of it? A weekend programmer? A professional from another field who loves to code? Feel free to use this license for your projects. Just update the copyright notice with your information and share your creations with the same spirit of openness and honesty about expectations.
-
-Use it. Improve it. Share it. Just remember its origins and consider contributing improvements back to the community.
 
 ## Legal Statement
 
