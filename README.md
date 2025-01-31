@@ -1,4 +1,4 @@
-# Light-Weight-Cookie-Consent
+# Light Weight Cookie Consent
 
 ## Overview
 This package provides a fully **GDPR-compliant** cookie consent solution with **server-side consent logging** and **external tracking script management**.
