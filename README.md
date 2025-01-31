@@ -1,4 +1,4 @@
-# Light Weight Cookie Consent
+# Light-Weight-Cookie-Consent
 
 ## Overview
 This package provides a fully **GDPR-compliant** cookie consent solution with **server-side consent logging** and **external tracking script management**.
@@ -9,6 +9,7 @@ This package provides a fully **GDPR-compliant** cookie consent solution with **
 - **Server-Side Logging** – GDPR-compliant logging of user consent.
 - **Manage Cookies Button** – Users can revoke consent anytime using an **include file**.
 - **Admin Panel (in `/lwca/` folder)** – Secure admin section for viewing consent logs.
+- **.htaccess Security by Default** – Prevent unauthorized access to the admin panel.
 - **Standalone PHP Files** – Easy to include in any project.
 
 ## Installation
@@ -47,27 +48,50 @@ Once the database is set up, upload the following files to your **website direct
 #### **Admin Panel (Secure) - Upload to `/lwca/`**
 Move these **admin files** into a **secure folder called `lwca/`**:
 - `lwca/admin_dashboard.php` (Admin panel for consent logs)
-- `lwca/admin_login.php` (Login page for admin panel)
+- `lwca/admin_login.php` (Login page for admin panel, optional)
 - `lwca/admin_logout.php` (Logout script)
 - `lwca/save_consent.php` (Handles consent logging)
 - `lwca/database_setup.sql` (SQL file to create the consent log table)
 
 ### 4. Secure the Admin Panel (`lwca/` folder)
-To prevent unauthorized access to the admin panel, create an **.htaccess** file inside the `lwca/` folder:  
+By **default, `.htaccess` security is enabled** to prevent unauthorized access. This ensures **only authenticated users** can access the consent logs.
 
-📌 **Create a file named `.htaccess` inside `lwca/` and add this content:**
-```
-AuthType Basic
-AuthName "Restricted Access"
-AuthUserFile /path/to/.htpasswd
-Require valid-user
-```
+#### **Default Security: .htaccess Protection**
+1. **Create a file named `.htaccess`** inside the **`lwca/`** folder.
+2. **Paste the following content inside `.htaccess`:**
+   ```
+   AuthType Basic
+   AuthName "Restricted Access"
+   AuthUserFile /path/to/.htpasswd
+   Require valid-user
+   ```
 
-📌 **Generate a `.htpasswd` file** to store admin credentials securely:
-```sh
-htpasswd -c /path/to/.htpasswd admin
-```
-Replace **`/path/to/.htpasswd`** with the actual path on your server.
+3. **Generate a `.htpasswd` file** to store admin credentials securely:
+   ```sh
+   htpasswd -c /path/to/.htpasswd admin
+   ```
+   - Replace `/path/to/.htpasswd` with the actual path where you want to store passwords.
+   - The above command will prompt you to **set a password for `admin`**.
+
+4. **Test the protection** by trying to access `/lwca/admin_dashboard.php`.  
+   - If configured correctly, a **username/password prompt** should appear.  
+
+#### **Optional: Enable Form-Based Login (Alternative or Additional Security)**
+If you prefer **form-based login** instead of `.htaccess` (or as an extra layer), enable the built-in **PHP login system**.
+
+1. **Open `lwca/admin_login.php`** and change the default credentials:
+   ```php
+   define("ADMIN_USER", "your_admin_username");
+   define("ADMIN_PASS", "your_secure_password");
+   ```
+2. **Remove `.htaccess` protection** (if you prefer only form login).
+
+### **Comparison of Security Methods**
+| Security Option  | Protection Level | How Users Log In |
+|------------------|-----------------|------------------|
+| **.htaccess (Default, Recommended)** | 🔒 Strong | Enter `admin` + password in a browser prompt before accessing admin panel |
+| **PHP Form Login (Optional)** | ✅ Moderate | Enter `admin` + password on login form (`admin_login.php`) |
+| **Both (Extra Secure)** | 🔥 Maximum Security | Enter `.htpasswd` password → Enter `admin_login.php` password |
 
 ### 5. Include the Cookie Banner
 Add this line in your **PHP pages** where you want to show the banner:
