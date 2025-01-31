@@ -1,4 +1,4 @@
-# The Enthusiast Coder License (EnCL) - Version 1.01
+# The Enthusiast Coder License (EnCL) - Version 1.02
 
 Copyright (c) 2025 Adrian Speyer
 
@@ -33,6 +33,20 @@ You are free to:
 - Original author's disclaimers and support limitations apply only to the original code
 - Derivative work creators may offer their own terms, support, and warranties for their modifications
 - This license's requirements apply only to the original code and original author
+
+## Commercial Use Considerations
+
+While this code is free to use commercially, we encourage commercial users to:
+1. Consider supporting the open source community in ways they deem appropriate
+2. Share back any significant improvements or modifications where feasible
+3. Provide public acknowledgment of the code's origins
+4. Recognize value created through the use of this code in whatever way feels right
+
+## License Evolution
+
+- The original author reserves the right to release future versions under different license terms
+- Changes in license terms will only apply to new versions of the code
+- Previous versions remain under their original license terms permanently
 
 ## Support and Maintenance
 
