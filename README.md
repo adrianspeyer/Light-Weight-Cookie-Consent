@@ -45,20 +45,20 @@ You can add additional tracking scripts inside `trackingscripts.js`.
 ### 4. Modify Terms & Conditions / Cookie Policy
 Update `terms-and-conditions.html` and `cookie-policy.html` with your site's specific legal details.
 
-### 5. Enable Server-Side Consent Logging (Optional)
-If you want to store user consent for compliance:
+### 5. Enable Server-Side Consent Logging (Recommended)
+To store user consent for GDPR compliance:
 1. **Set up the database**  
-   Run the following SQL command in your MySQL database:
-   ```sql
-   CREATE TABLE cookie_consent (
-       id INT AUTO_INCREMENT PRIMARY KEY,
-       user_ip VARCHAR(45) NOT NULL,
-       consent_status ENUM('accepted', 'declined') NOT NULL,
-       consent_timestamp TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-       user_agent TEXT
-   );
-   ```
-2. **Modify `save_consent.php`** with your database credentials.
+   - Locate the file **`database_setup.sql`** in this package.
+   - Run the SQL script in your MySQL database.  
+   - This will create a **`cookie_consent`** table to log user consent.
+   
+2. **Modify `save_consent.php`**  
+   - Open `save_consent.php` in a text editor.  
+   - Replace `your_host`, `your_database`, `your_db_user`, and `your_db_password` with your database credentials.  
+
+3. **Secure the Admin Panel** (Optional)  
+   - The admin dashboard at **`admin_dashboard.php`** allows you to view logged consent.
+   - Change the default credentials in **`admin_login.php`** (`ADMIN_USER`, `ADMIN_PASS`).
 
 ### 6. Manage Cookie Preferences (User Control)
 Users can revoke their consent at any time by clicking the "Manage Cookies" button.  
@@ -85,6 +85,4 @@ function manageCookies() {
 ```
 
 ## Support & Customization
-If you need **additional features** or **support**, feel free to modify the code or contact a developer.
-
-Enjoy full GDPR compliance while keeping your analytics running legally! 🚀
+If you need **additional features** or **support**, feel free to modify the code or contact a developer. This is released as is.
