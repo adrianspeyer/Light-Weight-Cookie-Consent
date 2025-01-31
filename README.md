@@ -24,7 +24,7 @@ Or download the ZIP file from GitHub and extract the contents.
 ### 2. Set Up the Database (MySQL)
 Before uploading the files, create the **database** for logging consent:
 
-1. Locate the file **`database_setup.sql`** in this package.
+1. Locate the file **`lwca/database_setup.sql`** in this package.
 2. Run the SQL script in your **MySQL database**.  
    - This will create a **`cookie_consent`** table to log user consent.
 3. Open **`lwca/save_consent.php`** and update your **database credentials**:
@@ -53,30 +53,64 @@ Move these **admin files** into a **secure folder called `lwca/`**:
 - `lwca/save_consent.php` (Handles consent logging)
 - `lwca/database_setup.sql` (SQL file to create the consent log table)
 
-### 4. Secure the Admin Panel (`lwca/` folder)
-By **default, `.htaccess` security is enabled** to prevent unauthorized access. This ensures **only authenticated users** can access the consent logs.
+### 4. Secure the Admin Panel (`lwca/` folder) with `.htaccess` (Default)
+By **default, `.htaccess` security is enabled** to prevent unauthorized access. This ensures **only authenticated users** can view consent logs.
 
-#### **Default Security: .htaccess Protection**
-1. **Create a file named `.htaccess`** inside the **`lwca/`** folder.
-2. **Paste the following content inside `.htaccess`:**
-   ```
-   AuthType Basic
-   AuthName "Restricted Access"
-   AuthUserFile /path/to/.htpasswd
-   Require valid-user
-   ```
+#### **📌 How to Set Up `.htpasswd` for Authentication**
+Follow these steps to **restrict access** to the `lwca/` folder.
 
-3. **Generate a `.htpasswd` file** to store admin credentials securely:
+1️⃣ **Create an `.htaccess` File**  
+Inside the **`lwca/`** folder, create a new file named:  
+```
+.htaccess
+```
+Paste this inside the file:
+```
+AuthType Basic
+AuthName "Restricted Access"
+AuthUserFile /path/to/.htpasswd
+Require valid-user
+```
+- **Replace `/path/to/.htpasswd`** with the actual location where you will store the `.htpasswd` file.
+
+2️⃣ **Create the `.htpasswd` File**  
+The `.htpasswd` file stores the **username & encrypted password** for authentication.
+
+📌 **On Linux/macOS**  
+Run this command in **Terminal**:
+```sh
+htpasswd -c /path/to/.htpasswd admin
+```
+- Replace `/path/to/.htpasswd` with the actual file path.
+- Replace `admin` with your **desired username**.
+- It will prompt you to **set a password**.
+
+📌 **On Windows**  
+1. **Download** `htpasswd.exe` from [Apache website](https://httpd.apache.org/docs/current/programs/htpasswd.html).
+2. Open **Command Prompt** and run:
    ```sh
-   htpasswd -c /path/to/.htpasswd admin
+   htpasswd -c C:\path	o\.htpasswd admin
    ```
-   - Replace `/path/to/.htpasswd` with the actual path where you want to store passwords.
-   - The above command will prompt you to **set a password for `admin`**.
+3. **Enter a password** when prompted.
 
-4. **Test the protection** by trying to access `/lwca/admin_dashboard.php`.  
-   - If configured correctly, a **username/password prompt** should appear.  
+3️⃣ **Verify Protection**  
+- Try accessing `/lwca/admin_dashboard.php` in your browser.
+- You should now see a **popup asking for a username & password**.
 
-#### **Optional: Enable Form-Based Login (Alternative or Additional Security)**
+4️⃣ **Keep `.htpasswd` Secure**  
+- **Never store `.htpasswd` inside `/lwca/`**.  
+- Store it **above your web root directory**, e.g.:  
+  ```
+  /home/youruser/.htpasswd
+  ```
+
+5️⃣ **Changing Your Password**  
+To **change the password**, use:
+```sh
+htpasswd /path/to/.htpasswd admin
+```
+
+### 5. Optional: Enable PHP Form-Based Login (Alternative or Additional Security)
 If you prefer **form-based login** instead of `.htaccess` (or as an extra layer), enable the built-in **PHP login system**.
 
 1. **Open `lwca/admin_login.php`** and change the default credentials:
@@ -93,7 +127,7 @@ If you prefer **form-based login** instead of `.htaccess` (or as an extra layer)
 | **PHP Form Login (Optional)** | ✅ Moderate | Enter `admin` + password on login form (`admin_login.php`) |
 | **Both (Extra Secure)** | 🔥 Maximum Security | Enter `.htpasswd` password → Enter `admin_login.php` password |
 
-### 5. Include the Cookie Banner
+### 6. Include the Cookie Banner
 Add this line in your **PHP pages** where you want to show the banner:
 ```php
 <?php include 'cookie-consent.php'; ?>
@@ -112,13 +146,6 @@ Add this line in your **PHP pages** where you want to show the banner:
   ```php
   <?php include 'cookie-consent.php?style=modal'; ?>
   ```
-
-### 6. Configure Tracking Scripts
-Edit `trackingscripts.js` to include your analytics and marketing trackers.
-
-- Replace the placeholders **"G-XXXXXXXXXX"**, **"YOUR_CLARITY_ID"**, **"YOUR_FACEBOOK_PIXEL_ID"** with your actual tracking IDs.
-
-You can add additional tracking scripts inside `trackingscripts.js`.
 
 ### 7. Manage Cookie Preferences (User Control)
 Users can revoke their consent at any time by clicking the "Manage Cookies" button.  
