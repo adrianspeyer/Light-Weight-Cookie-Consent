@@ -72,7 +72,7 @@ Edit `trackingscripts.js` to include your analytics and marketing trackers.
 You can add additional tracking scripts inside `trackingscripts.js`.
 
 ### 6. Modify Terms & Conditions / Cookie Policy
-Update `terms-and-conditions.html` and `cookie-policy.html` with your site's specific legal details.
+Update `terms-and-conditions.html` and `cookie-policy.html` with your site's specific legal details - or just link to them.
 
 ### 7. Secure the Admin Panel (Optional)
 1. The **admin panel** at `admin_dashboard.php` allows you to view consent logs.
