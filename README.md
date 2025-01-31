@@ -15,7 +15,7 @@ This package provides a fully **GDPR-compliant** cookie consent solution with **
 ### 1. Clone or Download the Code
 You can clone this repository using Git:  
 ```sh
-git clone https://github.com/your-repo/gdpr-cookie-consent.git
+git clone https://github.com/adrianspeyer/light-weight-cookie-consent.git
 ```
 Or download the ZIP file from GitHub and extract the contents.
 
