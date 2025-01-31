@@ -1,5 +1,3 @@
-# README.md
-
 # The Enthusiast Coder License (EnCL) - Version 1.0
 
 Copyright (c) 2025 Adrian Speyer
