@@ -12,10 +12,39 @@ This package provides a fully **GDPR-compliant** cookie consent solution with **
 
 ## Installation
 
-### 1. Upload the Files
-Extract the contents of the **`gdpr_cookie_consent.zip`** to your website directory.
+### 1. Clone or Download the Code
+You can clone this repository using Git:  
+```sh
+git clone https://github.com/your-repo/gdpr-cookie-consent.git
+```
+Or download the ZIP file from GitHub and extract the contents.
 
-### 2. Include the Cookie Banner
+### 2. Set Up the Database (MySQL)
+Before uploading the files, create the **database** for logging consent:
+
+1. Locate the file **`database_setup.sql`** in this package.
+2. Run the SQL script in your **MySQL database**.  
+   - This will create a **`cookie_consent`** table to log user consent.
+3. Open **`save_consent.php`** and update your **database credentials**:
+   ```php
+   $dsn = "mysql:host=your_host;dbname=your_database;charset=utf8mb4";
+   $username = "your_db_user";
+   $password = "your_db_password";
+   ```
+
+### 3. Upload Required Files to Your Website
+Once the database is set up, upload the following files to your **website directory**:
+- `cookie-consent.php` (Main consent banner)
+- `trackingscripts.js` (Tracking script loader)
+- `save_consent.php` (Logs consent to the database)
+- `admin_dashboard.php` (Admin panel for consent logs)
+- `admin_login.php` (Login page for admin panel)
+- `admin_logout.php` (Logout script)
+- `terms-and-conditions.html` (T&C page)
+- `cookie-policy.html` (Cookie policy page)
+- `README.md` (Setup guide)
+
+### 4. Include the Cookie Banner
 Add this line in your **PHP pages** where you want to show the banner:
 ```php
 <?php include 'cookie-consent.php'; ?>
@@ -35,32 +64,25 @@ Add this line in your **PHP pages** where you want to show the banner:
   <?php include 'cookie-consent.php?style=modal'; ?>
   ```
 
-### 3. Configure Tracking Scripts
+### 5. Configure Tracking Scripts
 Edit `trackingscripts.js` to include your analytics and marketing trackers.
 
 - Replace the placeholders **"G-XXXXXXXXXX"**, **"YOUR_CLARITY_ID"**, **"YOUR_FACEBOOK_PIXEL_ID"** with your actual tracking IDs.
 
 You can add additional tracking scripts inside `trackingscripts.js`.
 
-### 4. Modify Terms & Conditions / Cookie Policy
+### 6. Modify Terms & Conditions / Cookie Policy
 Update `terms-and-conditions.html` and `cookie-policy.html` with your site's specific legal details.
 
-### 5. Enable Server-Side Consent Logging (Recommended)
-To store user consent for GDPR compliance:
-1. **Set up the database**  
-   - Locate the file **`database_setup.sql`** in this package.
-   - Run the SQL script in your MySQL database.  
-   - This will create a **`cookie_consent`** table to log user consent.
-   
-2. **Modify `save_consent.php`**  
-   - Open `save_consent.php` in a text editor.  
-   - Replace `your_host`, `your_database`, `your_db_user`, and `your_db_password` with your database credentials.  
+### 7. Secure the Admin Panel (Optional)
+1. The **admin panel** at `admin_dashboard.php` allows you to view consent logs.
+2. Change the **default admin credentials** in `admin_login.php`:
+   ```php
+   define("ADMIN_USER", "admin");
+   define("ADMIN_PASS", "securepassword123");
+   ```
 
-3. **Secure the Admin Panel** (Optional)  
-   - The admin dashboard at **`admin_dashboard.php`** allows you to view logged consent.
-   - Change the default credentials in **`admin_login.php`** (`ADMIN_USER`, `ADMIN_PASS`).
-
-### 6. Manage Cookie Preferences (User Control)
+### 8. Manage Cookie Preferences (User Control)
 Users can revoke their consent at any time by clicking the "Manage Cookies" button.  
 Add this button to your **footer or menu**:
 ```html
@@ -85,4 +107,4 @@ function manageCookies() {
 ```
 
 ## Support & Customization
-If you need **additional features** or **support**, feel free to modify the code or contact a developer. This is released as is.
+If you need **additional features** or **support**, feel free to modify the code or contact a developer. This is released as-is.
