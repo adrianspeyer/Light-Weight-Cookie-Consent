@@ -41,8 +41,8 @@ Once the database is set up, upload the following files to your **website direct
 - `cookie-consent.php` (Main consent banner)
 - `trackingscripts.js` (Tracking script loader)
 - `manage-cookies.php` (**Include file for Manage Cookies button**)
-- `terms-and-conditions.html` (T&C page)
-- `cookie-policy.html` (Cookie policy page)
+- `terms-and-conditions.html` (**T&C page placeholder**)
+- `cookie-policy.html` (**Cookie policy page placeholder**)
 - `README.md` (Setup guide)
 
 #### **Admin Panel (Secure) - Upload to `/lwca/`**
@@ -52,28 +52,21 @@ Move these **admin files** into a **secure folder called `lwca/`**:
 - `lwca/admin_logout.php` (Logout script)
 - `lwca/save_consent.php` (Handles consent logging)
 - `lwca/database_setup.sql` (SQL file to create the consent log table)
+- `lwca/htaccess.txt` (**Rename to `.htaccess`** to enable security)
 
 ### 4. Secure the Admin Panel (`lwca/` folder) with `.htaccess` (Default)
 By **default, `.htaccess` security is enabled** to prevent unauthorized access. This ensures **only authenticated users** can view consent logs.
 
+#### **📌 How to Enable `.htaccess` Security**
+Inside the **`lwca/`** folder, **rename** the file:
+```
+htaccess.txt → .htaccess
+```
+
 #### **📌 How to Set Up `.htpasswd` for Authentication**
 Follow these steps to **restrict access** to the `lwca/` folder.
 
-1️⃣ **Create an `.htaccess` File**  
-Inside the **`lwca/`** folder, create a new file named:  
-```
-.htaccess
-```
-Paste this inside the file:
-```
-AuthType Basic
-AuthName "Restricted Access"
-AuthUserFile /path/to/.htpasswd
-Require valid-user
-```
-- **Replace `/path/to/.htpasswd`** with the actual location where you will store the `.htpasswd` file.
-
-2️⃣ **Create the `.htpasswd` File**  
+1️⃣ **Create an `.htpasswd` File**  
 The `.htpasswd` file stores the **username & encrypted password** for authentication.
 
 📌 **On Linux/macOS**  
@@ -93,59 +86,40 @@ htpasswd -c /path/to/.htpasswd admin
    ```
 3. **Enter a password** when prompted.
 
-3️⃣ **Verify Protection**  
+2️⃣ **Verify Protection**  
 - Try accessing `/lwca/admin_dashboard.php` in your browser.
 - You should now see a **popup asking for a username & password**.
 
-4️⃣ **Keep `.htpasswd` Secure**  
+3️⃣ **Keep `.htpasswd` Secure**  
 - **Never store `.htpasswd` inside `/lwca/`**.  
 - Store it **above your web root directory**, e.g.:  
   ```
   /home/youruser/.htpasswd
   ```
 
-5️⃣ **Changing Your Password**  
+4️⃣ **Changing Your Password**  
 To **change the password**, use:
 ```sh
 htpasswd /path/to/.htpasswd admin
 ```
 
-### 5. Optional: Enable PHP Form-Based Login (Alternative or Additional Security)
-If you prefer **form-based login** instead of `.htaccess` (or as an extra layer), enable the built-in **PHP login system**.
+### 5. Configure Tracking Scripts (`trackingscripts.js`)
+This package **only loads tracking scripts after user consent is given**.  
 
-1. **Open `lwca/admin_login.php`** and change the default credentials:
-   ```php
-   define("ADMIN_USER", "your_admin_username");
-   define("ADMIN_PASS", "your_secure_password");
-   ```
-2. **Remove `.htaccess` protection** (if you prefer only form login).
+📌 **How to Add Your Trackers:**  
+1. Open the file **`trackingscripts.js`**.  
+2. Replace the placeholders:  
+   - `"G-XXXXXXXXXX"` → **Your Google Analytics 4 ID**  
+   - `"YOUR_CLARITY_ID"` → **Your Microsoft Clarity ID**  
+   - `"YOUR_FACEBOOK_PIXEL_ID"` → **Your Facebook Pixel ID**  
+3. You can also add additional trackers inside `trackingscripts.js`.  
+4. These scripts **only run if the user has accepted cookies** (ensuring GDPR compliance).  
 
-### **Comparison of Security Methods**
-| Security Option  | Protection Level | How Users Log In |
-|------------------|-----------------|------------------|
-| **.htaccess (Default, Recommended)** | 🔒 Strong | Enter `admin` + password in a browser prompt before accessing admin panel |
-| **PHP Form Login (Optional)** | ✅ Moderate | Enter `admin` + password on login form (`admin_login.php`) |
-| **Both (Extra Secure)** | 🔥 Maximum Security | Enter `.htpasswd` password → Enter `admin_login.php` password |
-
-### 6. Include the Cookie Banner
-Add this line in your **PHP pages** where you want to show the banner:
-```php
-<?php include 'cookie-consent.php'; ?>
-```
-
-#### Customize Placement:
-- **Default (Bottom-Left)**  
-  ```php
-  <?php include 'cookie-consent.php'; ?>
-  ```
-- **Bottom-Right:**  
-  ```php
-  <?php include 'cookie-consent.php?style=bottom-right'; ?>
-  ```
-- **Full-Screen Modal:**  
-  ```php
-  <?php include 'cookie-consent.php?style=modal'; ?>
-  ```
+### 6. Using the Placeholder Pages (`terms-and-conditions.html`, `cookie-policy.html`)
+- The **`terms-and-conditions.html`** and **`cookie-policy.html`** pages are **placeholders**.
+- You can either:
+  - **Edit these files** with your actual policies, OR
+  - **Update `cookie-consent.php`** to link to existing legal pages on your website.
 
 ### 7. Manage Cookie Preferences (User Control)
 Users can revoke their consent at any time by clicking the "Manage Cookies" button.  
