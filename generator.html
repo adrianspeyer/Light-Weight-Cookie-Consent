@@ -1,0 +1,23 @@
+<!doctype html>
+<html lang="en">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Consent installation generator</title>
+<link rel="stylesheet" href="assets/generator.css">
+<main>
+<h1>Consent installation generator</h1>
+<p>Create a starting configuration for a self-hosted installation. Deploy and configure the PHP backend first. This form does not upload your settings.</p>
+<form id="generator">
+<label>Public installation URL <input id="base" type="url" required placeholder="https://example.com/consent/"></label>
+<label>Cookie policy URL <input id="policy" type="url" required placeholder="https://example.com/cookie-policy"></label>
+<label>Initial language <select id="language"><option value="">Website / browser preference</option><option value="en">English</option><option value="fr">Français</option></select></label>
+<button>Generate installation</button>
+</form>
+<p id="result-status" role="status"></p>
+<label>Save as <code>consent-settings.js</code> beside the package’s PHP files<textarea id="settings" rows="10" readonly></textarea></label>
+<label>Add these tags before optional tracking scripts<textarea id="snippet" rows="5" readonly></textarea></label>
+<p>The installation must be on the same origin as the website. Optional tracking is disabled until you explicitly configure adapters. Existing trackers elsewhere on the page are not automatically blocked. See the README for integration and release tests.</p>
+<p>Light Weight Cookie Consent by <a href="https://github.com/adrianspeyer/Light-Weight-Cookie-Consent">Adrian Speyer</a>. See LICENSE.md.</p>
+</main>
+<script src="assets/generator.js" defer></script>
+</html>

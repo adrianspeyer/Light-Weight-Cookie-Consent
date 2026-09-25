@@ -1,4 +1,12 @@
-AuthType Basic
-AuthName "Restricted Access"
-AuthUserFile /path/to/.htpasswd
-Require valid-user
+# Optional additional Apache Basic Auth. Configure the real AuthUserFile outside
+# the document root before copying to .htaccess. PHP admin authentication remains.
+# Scope this rule so the public compatibility save_consent.php endpoint works.
+<FilesMatch "^admin_(login|dashboard|logout)\.php$">
+    AuthType Basic
+    AuthName "Consent administration"
+    AuthUserFile /absolute/path/outside-web-root/.htpasswd
+    Require valid-user
+</FilesMatch>
+<FilesMatch "\.(sql|txt)$">
+    Require all denied
+</FilesMatch>

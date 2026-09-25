@@ -1,54 +1,20 @@
 <?php
-session_start();
-if (!isset($_SESSION["admin_logged_in"])) {
-    header("Location: admin_login.php");
-    exit;
-}
-
-// Database Connection
-$dsn = "mysql:host=your_host;dbname=your_database;charset=utf8mb4";
-$username = "your_db_user";
-$password = "your_db_password";
-
+declare(strict_types=1);
+require __DIR__ . '/common.php';
+$config = cc_admin_init(); cc_require_admin();
+if ($_SERVER['REQUEST_METHOD'] !== 'GET') { header('Allow: GET'); http_response_code(405); exit; }
+$before = filter_input(INPUT_GET, 'before', FILTER_VALIDATE_INT, ['options'=>['min_range'=>1]]);
 try {
-    $pdo = new PDO($dsn, $username, $password, [
-        PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION
-    ]);
-} catch (PDOException $e) {
-    die("Database connection failed: " . $e->getMessage());
-}
-
-// Fetch Consent Logs
-$stmt = $pdo->query("SELECT * FROM cookie_consent ORDER BY consent_timestamp DESC");
-$logs = $stmt->fetchAll(PDO::FETCH_ASSOC);
+    $pdo = cc_db();
+    $stmt = $pdo->prepare('SELECT * FROM cc_consent_events'.($before ? ' WHERE id < ?' : '').' ORDER BY id DESC LIMIT 100');
+    $stmt->execute($before ? [$before] : []); $logs = $stmt->fetchAll(PDO::FETCH_ASSOC);
+} catch (Throwable $e) { http_response_code(503); exit('Consent records unavailable.'); }
 ?>
-
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Admin Dashboard - Cookie Consent Logs</title>
-</head>
-<body>
-    <h2>Cookie Consent Logs</h2>
-    <table border="1">
-        <tr>
-            <th>ID</th>
-            <th>IP Address</th>
-            <th>Consent Status</th>
-            <th>Timestamp</th>
-            <th>User Agent</th>
-        </tr>
-        <?php foreach ($logs as $log): ?>
-        <tr>
-            <td><?= htmlspecialchars($log["id"]) ?></td>
-            <td><?= htmlspecialchars($log["user_ip"]) ?></td>
-            <td><?= htmlspecialchars($log["consent_status"]) ?></td>
-            <td><?= htmlspecialchars($log["consent_timestamp"]) ?></td>
-            <td><?= htmlspecialchars($log["user_agent"]) ?></td>
-        </tr>
-        <?php endforeach; ?>
-    </table>
-    <br>
-    <a href="admin_logout.php">Logout</a>
-</body>
-</html>
+<!doctype html><html lang="en"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Consent evidence</title>
+<body><main><h1>Consent evidence</h1><p>Latest 100 events, UTC. Necessary storage is always enabled. Records show choices; they do not certify tracker behaviour or legal compliance.</p>
+<table><caption>Recorded consent changes</caption><thead><tr><th scope="col">ID</th><th scope="col">Receipt</th><th scope="col">Action</th><th scope="col">Analytics</th><th scope="col">Marketing</th><th scope="col">GPC</th><th scope="col">Revision</th><th scope="col">Language</th><th scope="col">Time (UTC)</th><th scope="col">Expires (UTC)</th></tr></thead><tbody>
+<?php foreach ($logs as $log): ?><tr><?php foreach (['id','receipt_id','action','analytics','marketing','gpc','revision','language','created_at','expires_at'] as $key): ?><td><?= cc_escape($log[$key]) ?></td><?php endforeach; ?></tr><?php endforeach; ?>
+</tbody></table>
+<?php if (count($logs) === 100): ?><p><a href="?before=<?= cc_escape($logs[99]['id']) ?>">Older events</a></p><?php endif; ?>
+<form action="admin_logout.php" method="post"><input type="hidden" name="csrf" value="<?= cc_escape($_SESSION['csrf']) ?>"><button type="submit">Log out</button></form>
+</main></body></html>

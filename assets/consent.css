@@ -1,0 +1,21 @@
+#lwca-widget { font: 16px/1.45 system-ui, sans-serif; color: #172b3a; }
+#lwca-widget [hidden] { display: none !important; }
+#lwca-panel { position: fixed; bottom: 4.5rem; right: 1rem; width: min(30rem, calc(100vw - 2rem)); max-height: calc(100dvh - 6rem); overflow-y: auto; box-sizing: border-box; padding: 1.25rem; border: 2px solid #263f52; border-radius: .6rem; background: #fff; color: #172b3a; box-shadow: 0 6px 28px #0004; z-index: 2147483646; }
+#lwca-panel h2 { font-size: 1.3rem; margin: 0 0 .75rem; }
+#lwca-panel p { margin: .5rem 0 .8rem; }
+#lwca-panel fieldset { border: 1px solid #8193a0; margin: 1rem 0; padding: .75rem; }
+#lwca-panel legend { font-weight: 600; }
+#lwca-panel a { color: #064f8c; text-decoration: underline; }
+#lwca-panel .lwca-category { display: flex; align-items: center; gap: .6rem; font-weight: 600; }
+#lwca-panel input { width: 1.3rem; height: 1.3rem; accent-color: #164e72; }
+#lwca-panel .lwca-detail { font-size: .85rem; overflow-wrap: anywhere; }
+#lwca-widget button, #lwca-widget select { font: inherit; border: 1px solid #38586f; border-radius: .3rem; background: #fff; color: #172b3a; padding: .65rem .8rem; cursor: pointer; min-height: 44px; }
+#lwca-widget button:focus-visible, #lwca-widget select:focus-visible, #lwca-widget input:focus-visible, #lwca-widget a:focus-visible { outline: 3px solid #b34600; outline-offset: 3px; }
+#lwca-widget button:hover { background: #e9f1f7; }
+#lwca-widget button:disabled { opacity: .6; cursor: wait; }
+#lwca-panel .lwca-actions { display: flex; gap: .5rem; flex-wrap: wrap; margin: 1rem 0; }
+#lwca-panel .lwca-actions button { flex: 1 1 8rem; }
+#lwca-manage { position: fixed; bottom: 1rem; right: 1rem; z-index: 2147483646; box-shadow: 0 2px 8px #0003; }
+#lwca-status { position: fixed; left: 1rem; bottom: 1rem; margin: 0; max-width: min(28rem, calc(100vw - 2rem)); z-index: 2147483647; background: #fff; color: #172b3a; box-shadow: 0 2px 8px #0003; }
+#lwca-status:not(:empty) { padding: .75rem; border: 1px solid #38586f; }
+@media (max-width: 600px) { #lwca-status:not(:empty) { bottom: 4.5rem; } }
