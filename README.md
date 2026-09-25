@@ -5,8 +5,8 @@ server-confirmed choices, an append-only consent event ledger and a protected ad
 
 **Version 2.0.0 — breaking configuration/schema upgrade.** The previous release's
 unqualified compliance claims are withdrawn. This is a technical component that supports
-configured consent workflows; it does not certify GDPR, Quebec, California or worldwide
-compliance. Review the actual website, applicable rules and vendor integrations before release.
+configured consent workflows; it does not certify compliance with privacy laws.
+Review the actual website, applicable rules and vendor integrations before release.
 
 Original author: **Adrian Speyer** — [repository](https://github.com/adrianspeyer/Light-Weight-Cookie-Consent).
 This upgrade modifies the original implementation; [LICENSE.md](LICENSE.md) remains in force.
